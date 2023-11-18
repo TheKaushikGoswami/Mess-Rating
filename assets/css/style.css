@@ -1,21 +1,22 @@
-.rating {
+.rating-breakfast, .rating-lunch, .rating-snacks, .rating-dinner, .rating-mess {
     display: flex;
     flex-direction: row-reverse;
     /* justify-content: center; */
     align-items: center;
+    /* transform: translate(180deg); */
 }
 
-.rating input {
+.rating-breakfast input, .rating-lunch input, .rating-snacks input, .rating-dinner input, .rating-mess input {
     display: none;
 }
 
-.rating label::before {
+.rating-breakfast label::before, .rating-lunch label::before, .rating-snacks label::before, .rating-dinner label::before, .rating-mess label::before {
     content: "\2605";
     /* Unicode character for a star */
     font-size: 30px;
     color: gray;
 }
 
-.rating input:checked~label::before {
+.rating-breakfast input:checked~label::before, .rating-lunch input:checked~label::before, .rating-snacks input:checked~label::before, .rating-dinner input:checked~label::before, .rating-mess input:checked~label::before {
     color: gold;
 }

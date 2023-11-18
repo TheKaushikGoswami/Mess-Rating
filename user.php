@@ -8,7 +8,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- <script src="assets/js/stars.js"></script> -->
+    <script src="assets/js/stars.js"></script>
 </head>
 <body>
     <div class="card col-md-6 m-auto">
@@ -42,7 +42,7 @@
                 <div class="card-header fs-5">Ratings</div>
                 <div class="col-md-8 m-auto">
                     
-                    <div class="input-group mb-3 ">
+                    <div class="input-group mt-3 mb-3 ">
                         <span class="input-group-text col-md-3">Breakfast</span>
                         <div class="rating-breakfast col-md-6">
                             <input type="radio" id="breakfast-star5" name="rating-breakfast" value="5" /><label for="breakfast-star5"></label>
