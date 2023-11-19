@@ -2,5 +2,5 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'interschool2023');
+define('DB_NAME', 'mess rating');
 ?>
