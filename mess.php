@@ -1,37 +1,47 @@
 <?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: login.php'); // Redirect to the login page
+    exit;
+}
+
 include 'Database.php';
 include 'config.php';
 
 $db = new Database();
 
-if (isset($_POST['submit'])) {
+if(isset($_POST['submit'])){
+    // Rest of your code...
+    date_default_timezone_set('Asia/Kolkata');
 
-    $date = date('Y-m-d', strtotime('+5 hours 30 minutes'));
-    $breakfast = $_POST['breakfast'];
-    $lunch = $_POST['lunch'];
-    $snacks = $_POST['snacks'];
-    $dinner = $_POST['dinner'];
-    $query = "INSERT INTO `menu` (`date`, `breakfast`, `lunch`, `snacks`, `dinner`) VALUES ('$date', '$breakfast', '$lunch', '$snacks', '$dinner')";
+    $date = $_POST['date'];
+    $meal = $_POST['meal'];
+    $item1 = $_POST['item1'];
+    $item2 = $_POST['item2'];
+    $item3 = $_POST['item3'];
+    $item4 = $_POST['item4'];
+    $item5 = $_POST['item5'];
+    $item6 = $_POST['item6'];
 
-    $duplicate = "SELECT * FROM menu WHERE menu.date = '$date'";
-    $check = $db->select($duplicate);
-    if($check){
-        $error = "The menu for today has already been entered!";
-        echo "<script>alert('$error')</script>";
-    }
-    else{
-        $result = $db->insert($query);
-    }
-
-    if(isset($result)){
-        echo "<script>alert('Menu entered successfully!')</script>";
-    }
-    else{
-        echo "<script>alert('Something went wrong!')</script>";
+    $query = "INSERT INTO `menu`(`date`, `meal`, `item1`, `item2`, `item3`, `item4`, `item5`, `item6`) VALUES ('$date','$meal','$item1','$item2','$item3','$item4','$item5','$item6')";
+    $create = $db->insert($query);
+    if(isset($create)){
+        echo "<script>alert('Data Inserted Successfully.');</script>";
+    }else{
+        echo "<script>alert('Data Insertion Failed.');</script>";
     }
 }
 
+if(isset($_POST['logout'])){
+    session_destroy();
+    header('Location: login.php'); // Redirect to the login page
+    exit;
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,30 +61,106 @@ if (isset($_POST['submit'])) {
         </div>
 
         <div class="card-body ">
-            <form action="" method="post">
-
-                <div class="input-group ">
-                    <span class="input-group-text col-md-2">Breakfast</span>
-                    <textarea class="form-control" name="breakfast" style="height: 150px" aria-label="Breakfast" required></textarea>
-                </div><br>
-                <div class="input-group">
-                    <span class="input-group-text col-md-2">Lunch</span>
-                    <textarea class="form-control" name="lunch" style="height: 150px" aria-label="With textarea" required></textarea>
-                </div><br>
-                <div class="input-group">
-                    <span class="input-group-text col-md-2">Snacks</span>
-                    <textarea class="form-control" name="snacks" style="height: 150px" aria-label="With textarea" required></textarea>
-                </div><br>
-                <div class="input-group">
-                    <span class="input-group-text col-md-2">Dinner</span>
-                    <textarea class="form-control" name="dinner" style="height: 150px" aria-label="With textarea" re></textarea>
-                </div><br>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" name="submit" type="submit">Submit</button>
-                  </div>
+            <form action="" method="post" class="fs-5">
+                <label for="date">Date</label>
+                <input class="form-control mb-3" name="date" type="date">
+                <label for="meal">Meal</label>
+                <select class="form-select mb-3" name="meal" id="meal">
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="snacks">Snacks</option>
+                    <option value="dinner">Dinner</option>
+                </select>
+                <label for="item1">Item 1</label>
+                <select class="form-select mb-3" name="item1" id="item1">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="item2">Item 2</label>
+                <select class="form-select mb-3" name="item2" id="item2">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="item3">Item 3</label>
+                <select class="form-select mb-3" name="item3" id="item3">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="item4">Item 4</label>
+                <select class="form-select mb-3" name="item4" id="item4">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="item5">Item 5</label>
+                <select class="form-select mb-3" name="item5" id="item5">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <label for="item6">Item 6</label>
+                <select class="form-select mb-3 mb-3" name="item6" id="item6">
+                    <?php
+                        $query = "SELECT * FROM `items`";
+                        $read = $db->select($query);
+                        if($read){
+                            while($row = $read->fetch_assoc()){
+                    ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <div class="d-grid mt-5">
+                        <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+                    </div>
             </form>
         </div>
     </div>
       
-</body>
+</body> 
 </html>
