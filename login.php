@@ -20,40 +20,39 @@ if (isset($_POST['login'])) {
 ?>
 
 
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href=
-"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="login.css">
-	<title>Login Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-	<form action="" method="post">
-		<div class="login-box">
-			<h1>Mess Master Login</h1>
-
-			<div class="textbox">
-				<i class="fa fa-user" aria-hidden="true"></i>
-				<input type="text" placeholder="email"
-						name="email" value="">
-			</div>
-
-			<div class="textbox">
-				<i class="fa fa-lock" aria-hidden="true"></i>
-				<input type="password" placeholder="Password"
-						name="password" value="">
-			</div>
-
-			<input class="button" type="submit"
-					name="login" value="Sign In">
-		</div>
-	</form>
+    <div class="card col-md-6 m-auto mt-5">
+        <div class="card-header">
+            <h2>Log in Here</h2>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Enter your email"
+                    required>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control mb-3"
+                    placeholder="Enter your password" required>
+                <p>Don't have Account?<a href="register.php">Sign up</a></p>
+                <button type="submit" name="login" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

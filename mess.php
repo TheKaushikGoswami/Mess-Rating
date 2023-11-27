@@ -57,6 +57,11 @@ if(isset($_POST['logout'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="col-md-4">
+        <form action="" method="post">
+            <button class="btn btn-danger" name="logout" type="submit">Logout</button>
+        </form>
+    </div>
     <div class="card col-md-6 m-auto">
         <div class="card-header">
 
