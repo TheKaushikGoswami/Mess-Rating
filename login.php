@@ -9,7 +9,7 @@ $db = new Database();
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-	if ($email == 'mess@geetauniversity.edu.in' || $password == 'mess@123') {
+	if ($email == 'mess@geetauniversity.edu.in' && $password == 'mess@123') {
         session_start();
         $_SESSION['email'] = $email;
         header('location:mess.php');
