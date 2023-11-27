@@ -1,16 +1,19 @@
 <?php
+ob_start();
 session_start(); // Start the session
 
 // Check if the user is logged in
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: login.php'); // Redirect to the login page
-    exit;
-}
 
 include 'Database.php';
 include 'config.php';
 
 $db = new Database();
+
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php'); // Redirect to the login page
+
+}
+
 
 if(isset($_POST['submit'])){
     // Rest of your code...

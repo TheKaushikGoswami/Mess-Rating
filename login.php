@@ -4,37 +4,19 @@ include_once('config.php');
 include_once('database.php');
 
 $db = new Database();
-function test_input($data) {
-	
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	
-	$username = test_input($_POST["username"]);
-	$password = test_input($_POST["password"]);
-	$stmt = $db->select("SELECT * FROM users");
-	
-$users = mysqli_fetch_all($stmt, MYSQLI_ASSOC);
-	
-	foreach($users as $user) {
-		
-		if(($user['email'] == $username) && 
-			($user['password'] == $password)) {
-				header("location: mess.php");
-		}
-		else {
-			echo "<script language='javascript'>";
-			echo "alert('WRONG INFORMATION')";
-			echo "</script>";
-			die();
-		}
-	}
-}
 
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+	if ($email == 'mess@geetauniversity.edu.in' || $password == 'mess@123') {
+        session_start();
+        $_SESSION['email'] = $email;
+        header('location:mess.php');
+    } else {
+        echo "<script>alert('Email or password is incorrect.')</script>";
+    }
+}
 ?>
 
 
@@ -54,12 +36,12 @@ $users = mysqli_fetch_all($stmt, MYSQLI_ASSOC);
 <body>
 	<form action="" method="post">
 		<div class="login-box">
-			<h1>Login</h1>
+			<h1>Mess Master Login</h1>
 
 			<div class="textbox">
 				<i class="fa fa-user" aria-hidden="true"></i>
-				<input type="text" placeholder="Username"
-						name="username" value="">
+				<input type="text" placeholder="email"
+						name="email" value="">
 			</div>
 
 			<div class="textbox">
