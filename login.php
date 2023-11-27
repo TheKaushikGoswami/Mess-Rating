@@ -45,7 +45,6 @@ if (isset($_POST['login'])) {
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control mb-3"
                     placeholder="Enter your password" required>
-                <p>Don't have Account?<a href="register.php">Sign up</a></p>
                 <button type="submit" name="login" class="btn btn-primary">Register</button>
             </form>
         </div>
