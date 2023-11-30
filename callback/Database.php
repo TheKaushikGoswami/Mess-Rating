@@ -45,8 +45,7 @@ class Database{
         public function update($query){
             $update_row = $this->link->query($query)or die($this->link->error.__LINE__);
             if($update_row){
-                header("location:index.php?msg=".urlencode('Data Updated Successfully .'));
-                exit();
+                return true;
             }else{
                 die("Error: :".$this->link->errno.")".$this->link->error);
             }

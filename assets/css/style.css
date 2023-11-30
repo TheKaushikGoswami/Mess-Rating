@@ -1,22 +1,31 @@
-.rating-breakfast, .rating-lunch, .rating-snacks, .rating-dinner, .rating-mess {
+.rating {
+    width: 70%;
     display: flex;
     flex-direction: row-reverse;
-    /* justify-content: center; */
+    justify-content: space-evenly;
     align-items: center;
-    /* transform: translate(180deg); */
+    margin: 0 auto;
 }
 
-.rating-breakfast input, .rating-lunch input, .rating-snacks input, .rating-dinner input, .rating-mess input {
+.rating input {
     display: none;
 }
 
-.rating-breakfast label::before, .rating-lunch label::before, .rating-snacks label::before, .rating-dinner label::before, .rating-mess label::before {
+.rating label::before {
     content: "\2605";
     /* Unicode character for a star */
     font-size: 30px;
     color: gray;
 }
 
-.rating-breakfast input:checked~label::before, .rating-lunch input:checked~label::before, .rating-snacks input:checked~label::before, .rating-dinner input:checked~label::before, .rating-mess input:checked~label::before {
+.rating input:checked~label::before {
     color: gold;
+}
+
+.danger{
+    color: red;
+}
+
+select .danger:selected{
+    color: red;
 }
