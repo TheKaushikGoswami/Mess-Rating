@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
         $meal = $_POST['meal'];
         $item = $_POST['item_old'];
         $item_new = $_POST['item_update'];
-        $query = "UPDATE `menu` SET `item_id`='$item_new' WHERE DATE(`datetime`)='$date' AND `meal_id`='$meal' AND `item_id`='$item'";
+        $query = "UPDATE `menu` SET `item_id`='$item_new' WHERE DATE(`date`)='$date' AND `meal_id`='$meal' AND `item_id`='$item'";
         $update = $db->update($query);
         if($update){
             echo "<script>alert('Data Successfully Updated.');</script>";

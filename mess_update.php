@@ -87,13 +87,13 @@ include 'callback/mess_update.php';
                 <th>Item</th>
             </tr>
             <?php
-                $query = "SELECT * FROM `menu` where `datetime` >= '$date'";
+                $query = "SELECT * FROM `menu` where `date` >= '$date'";
                 $read = $db->select($query);
                 if($read){
                     while($row = $read->fetch_assoc()){
             ?>
             <tr>
-                <td><?php echo date('Y-m-d', strtotime($row['datetime'])); ?></td>
+                <td><?php echo date('Y-m-d', strtotime($row['date'])); ?></td>
                 <td><?php $mealView = $row['meal_id']; 
                     if($mealView == 1){
                         echo "Breakfast";

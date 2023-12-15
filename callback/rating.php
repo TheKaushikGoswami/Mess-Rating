@@ -22,37 +22,58 @@ if(isset($_POST['logout'])){
 
 if($currentTime >= '8:00' && $currentTime <= '12:00'){
     $meal = '1';
+    $query = "SELECT * FROM `menu` WHERE meal_id = 1 AND date = '$date'";
+    $result = $db->select($query);
+    $no_of_rows = mysqli_num_rows($result);
+    
 }elseif($currentTime >= '12:00' && $currentTime <= '16:00'){
     $meal = '2';
+    $query = "SELECT * FROM `menu` WHERE meal_id = 2 AND date = '$date'";
+    $result = $db->select($query);
+    $no_of_rows = mysqli_num_rows($result);
+
 }elseif($currentTime >= '16:00' && $currentTime <= '20:00'){
     $meal = '3';
+    $query = "SELECT * FROM `menu` WHERE meal_id = 3 AND date = '$date'";
+    $result = $db->select($query);
+    $no_of_rows = mysqli_num_rows($result);
+
 }elseif($currentTime >= '20:00' && $currentTime <= '23:59'){
     $meal = '4';
-}
+    $query = "SELECT * FROM `menu` WHERE meal_id = 4 AND date = '$date'";
+    $result = $db->select($query);
+    $no_of_rows = mysqli_num_rows($result);
 
+}
 
 if(isset($_POST['submit'])){
-    $userid = $_SESSION['id'];
-    $date = date('Y-m-d');
-    $item = $_POST['items'];
-    $rating = $_POST['rating'];
-    $menu_id = $_POST['menu_id'];
-    
-    // Check if the user has already rated the item
-    $checkQueryResult = "SELECT * FROM `ratings` WHERE `user_id`='$userid' AND `date`='$date' AND `meal_id`='$meal' AND `item_id`='$item'";
-    $checkResultView = $db->select($checkQueryResult);
-    
-    if($checkResultView){
-        echo "<script>alert('You have already rated this item.');</script>";
-    }else{
-        $query = "INSERT INTO `ratings`(`user_id`, `date`, `meal_id`, `item_id`, `rating`, `menu_id`) VALUES ('$userid','$date','$meal','$item','$rating', '$menu_id')";
-        $create = $db->insert($query);
-        if(isset($create)){
-            echo "<script>alert('Thank you for rating the dish. Now you can rate another dish.');</script>";
-        }else{
-            echo "<script>alert('Data insertion failed.');</script>";
+    $i = 1;
+    while($i <= $no_of_rows){
+        error_reporting(E_ALL ^ E_WARNING);
+        $item_id = $_POST['item_id'.$i];
+        $rating = $_POST['rating'.$i];
+        $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal' and date = '$date'";
+        if($rating == 0){
+            $rating = NULL;
         }
+        $check_result = $db->select($check);
+        if($check_result){
+            if($check_result->num_rows > 0){
+                $query = "UPDATE `ratings` SET `rating`='$rating' WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal' and date = '$date'";
+                $result = $db->update($query);
+            }else{
+                break;
+            }
+        }
+        else{
+        $query = "INSERT INTO `ratings`(`user_id`, `item_id`, `rating`, `meal_id`) VALUES ('$userid','$item_id','$rating','$meal')";
+        $result = $db->insert($query);
     }
+    $i++;
+    }
+    
 }
+
+
 
 ?>

@@ -65,7 +65,7 @@ echo "
             
 
             // Fetch all items from the menu table
-            $query = "SELECT * FROM `menu` where DATE(`datetime`) = '$dateselected'";
+            $query = "SELECT * FROM `menu` where DATE(`date`) = '$dateselected'";
             $menuItems = $db->select($query);
             if(!$menuItems){
                 echo "<tr><td colspan='4' class='text-center'>No data found</td></tr>";
@@ -115,7 +115,7 @@ echo "
                 <th class="col-md-4" >Users rated</th>
             </tr>
             <?php
-            $query = "SELECT * FROM `menu` where DATE(`datetime`) = '$dateselected' and `meal_id` = 1";
+            $query = "SELECT * FROM `menu` where DATE(`date`) = '$dateselected' and `meal_id` = 1";
             $menuItems = $db->select($query);
             if(!$menuItems){
                 echo "<tr><td colspan='3' class='text-center'>No data found</td></tr>";
@@ -183,7 +183,7 @@ echo "
                 <th class="col-md-4" >Users rated</th>
             </tr>
             <?php
-            $query = "SELECT * FROM `menu` where DATE(`datetime`) = '$dateselected' and `meal_id` = 2";
+            $query = "SELECT * FROM `menu` where DATE(`date`) = '$dateselected' and `meal_id` = 2";
             $menuItems = $db->select($query);
             if(!$menuItems){
                 echo "<tr><td colspan='3' class='text-center'>No data found</td></tr>";
@@ -251,7 +251,7 @@ echo "
                 <th class="col-md-4" >Users rated</th>
             </tr>
             <?php
-            $query = "SELECT * FROM `menu` where DATE(`datetime`) = '$dateselected' and `meal_id` = 3";
+            $query = "SELECT * FROM `menu` where DATE(`date`) = '$dateselected' and `meal_id` = 3";
             $menuItems = $db->select($query);
             if(!$menuItems){
                 echo "<tr><td colspan='3' class='text-center'>No data found</td></tr>";
@@ -321,7 +321,7 @@ echo "
                 <th class="col-md-4" >Users rated</th>
             </tr>
             <?php
-            $query = "SELECT * FROM `menu` where DATE(`datetime`) = '$dateselected' and `meal_id` = 4";
+            $query = "SELECT * FROM `menu` where DATE(`date`) = '$dateselected' and `meal_id` = 4";
             $menuItems = $db->select($query);
             if(!$menuItems){
                 echo "<tr><td colspan='3' class='text-center'>No data found</td></tr>";

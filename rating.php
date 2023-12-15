@@ -18,47 +18,155 @@ include 'includes/header.php';
         </div>
         <div class="card-body ">
             <form action="" method="post">
-                <span>Items</span>
                 <?php
-                    $query = "SELECT * FROM `menu` WHERE meal_id = 2 AND date = '$date'";
-                    $result = $db->query($query);
+                   if($currentTime >= '8:00' && $currentTime <= '12:00'){
+                    $query = "SELECT * FROM `menu` WHERE meal_id = 1 AND date = '$date'";
+                    $result = $db->select($query);
 
                     if ($result) {
+                        $i = 1;
                         while ($row = $result->fetch_assoc()) {
-                            $i = 1;
                             $item_id = $row['item_id'];
-                            $q2 = "SELECT * FROM `items` WHERE item_id = $item_id";
-                            $r2 = $db->query($q2);
+                            $q2 = "SELECT * FROM `items` WHERE id = $item_id";
+                            $r2 = $db->select($q2);
 
                             if ($r2) {
                                 foreach ($r2 as $row2) {
-                                    $item_name = $row2['item_name'];
+                                    $item_name = $row2['name'];
                                 }
-                                echo $item_name;
-                                echo "<div class='rating '>
-                                    <input type='radio' id='star5' name='rating".$i."' value='5' /><label for='star5'></label>
-                                    <input type='radio' id='star4' name='rating".$i."' value='4' /><label for='star4'></label>
-                                    <input type='radio' id='star3' name='rating".$i."' value='3' /><label for='star3'></label>
-                                    <input type='radio' id='star2' name='rating".$i."' value='2' /><label for='star2'></label>
-                                    <input type='radio' id='star1' name='rating".$i."' value='1' /><label for='star1'></label>
-                                </div>";
-                            } else {
-                                echo "Error executing query: " . $db->error;
-                            }
+                                $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal'";
+                                $check_result = $db->select($check);
+                                if($check_result){
+                                    echo "<div class='input-group color-danger mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                    echo $item_name. "</span>";
+                                    $i++;}
+                                else{
+                                echo "<div class='input-group mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                echo $item_name. "</span>";
+                                echo "<div class='rating border border-start-0 rounded col-md-9' >
+                                <input type='hidden' name='item_id".$i."' value='".$item_id."'> 
+                                    <input type='radio' id='star5".$i."' name='rating".$i."' value='5' /><label for='star5".$i."'></label>
+                                    <input type='radio' id='star4".$i."' name='rating".$i."' value='4' /><label for='star4".$i."'></label>
+                                    <input type='radio' id='star3".$i."' name='rating".$i."' value='3' /><label for='star3".$i."'></label>
+                                    <input type='radio' id='star2".$i."' name='rating".$i."' value='2' /><label for='star2".$i."'></label>
+                                    <input type='radio' id='star1".$i."' name='rating".$i."' value='1' /><label for='star1".$i."'></label>
+                                    </div></div>";
+                                $i++;
+                            } }
                         }
-                    } else {
-                        echo "Error executing query: " . $db->error;
                     }
+                }elseif($currentTime >= '12:00' && $currentTime <= '16:00'){
+                    $query = "SELECT * FROM `menu` WHERE meal_id = 2 AND date = '$date'";
+                    $result = $db->select($query);
 
-                    
+                    if ($result) {
+                        $i = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            $item_id = $row['item_id'];
+                            $q2 = "SELECT * FROM `items` WHERE id = $item_id";
+                            $r2 = $db->select($q2);
+
+                            if ($r2) {
+                                foreach ($r2 as $row2) {
+                                    $item_name = $row2['name'];
+                                }
+                                $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal'";
+                                $check_result = $db->select($check);
+                                if($check_result){
+                                    echo "<div class='input-group color-danger mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                    echo $item_name. "</span>";
+                                    $i++;}
+                                else{
+                                echo "<div class='input-group mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                echo $item_name. "</span>";
+                                echo "<div class='rating border border-start-0 rounded col-md-9' >
+                                <input type='hidden' name='item_id".$i."' value='".$item_id."'> 
+                                    <input type='radio' id='star5".$i."' name='rating".$i."' value='5' /><label for='star5".$i."'></label>
+                                    <input type='radio' id='star4".$i."' name='rating".$i."' value='4' /><label for='star4".$i."'></label>
+                                    <input type='radio' id='star3".$i."' name='rating".$i."' value='3' /><label for='star3".$i."'></label>
+                                    <input type='radio' id='star2".$i."' name='rating".$i."' value='2' /><label for='star2".$i."'></label>
+                                    <input type='radio' id='star1".$i."' name='rating".$i."' value='1' /><label for='star1".$i."'></label>
+                                    </div></div>";
+                                $i++;
+                            } 
+                        }}
+                    } 
+                }elseif($currentTime >= '16:00' && $currentTime <= '20:00'){
+                    $query = "SELECT * FROM `menu` WHERE meal_id = 3 AND date = '$date'";
+                    $result = $db->select($query);
+
+                    if ($result) {
+                        $i = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            $item_id = $row['item_id'];
+                            $q2 = "SELECT * FROM `items` WHERE id = $item_id";
+                            $r2 = $db->select($q2);
+
+                            if ($r2) {
+                                foreach ($r2 as $row2) {
+                                    $item_name = $row2['name'];
+                                }
+                                $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal' and date = '$date'";
+                                $check_result = $db->select($check);
+                                if($check_result){
+                                    echo "<div class='input-group mb-3'><span class='input-group-text text-danger col-md-3' id='basic-addon1'>";
+                                    echo $item_name. "</span>
+                                    <div class='text-danger border text-center border-start-0 rounded col-md-9' >
+                                    You have already rated this item.</div>
+                                    </div>";
+                                    }
+                                else{
+                                echo "<div class='input-group mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                echo $item_name. "</span>";
+                                echo "<div class='rating border border-start-0 rounded col-md-9' >
+                                <input type='hidden' name='item_id".$i."' value='".$item_id."'> 
+                                    <input type='radio' id='star5".$i."' name='rating".$i."' value='5' /><label for='star5".$i."'></label>
+                                    <input type='radio' id='star4".$i."' name='rating".$i."' value='4' /><label for='star4".$i."'></label>
+                                    <input type='radio' id='star3".$i."' name='rating".$i."' value='3' /><label for='star3".$i."'></label>
+                                    <input type='radio' id='star2".$i."' name='rating".$i."' value='2' /><label for='star2".$i."'></label>
+                                    <input type='radio' id='star1".$i."' name='rating".$i."' value='1' /><label for='star1".$i."'></label>
+                                    </div></div>";
+                                $i++;
+                            } 
+                        }}
+                    }
+                }elseif($currentTime >= '20:00' && $currentTime <= '23:59'){
+                    $query = "SELECT * FROM `menu` WHERE meal_id = 4 AND date = '$date'";
+                    $result = $db->select($query);
+
+                    if ($result) {
+                        $i = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            $item_id = $row['item_id'];
+                            $q2 = "SELECT * FROM `items` WHERE id = $item_id";
+                            $r2 = $db->select($q2);
+
+                            if ($r2) {
+                                foreach ($r2 as $row2) {
+                                    $item_name = $row2['name'];
+                                }
+                                $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal'";
+                                $check_result = $db->select($check);
+                                if($check_result){
+                                    echo "<div class='input-group color-danger mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                    echo $item_name. "</span>";
+                                    $i++;}
+                                else{
+                                echo "<div class='input-group mb-3'><span class='input-group-text col-md-3' id='basic-addon1'>";
+                                echo $item_name. "</span>";
+                                echo "<div class='rating border border-start-0 rounded col-md-9' >
+                                <input type='hidden' name='item_id".$i."' value='".$item_id."'> 
+                                    <input type='radio' id='star5".$i."' name='rating".$i."' value='5' /><label for='star5".$i."'></label>
+                                    <input type='radio' id='star4".$i."' name='rating".$i."' value='4' /><label for='star4".$i."'></label>
+                                    <input type='radio' id='star3".$i."' name='rating".$i."' value='3' /><label for='star3".$i."'></label>
+                                    <input type='radio' id='star2".$i."' name='rating".$i."' value='2' /><label for='star2".$i."'></label>
+                                    <input type='radio' id='star1".$i."' name='rating".$i."' value='1' /><label for='star1".$i."'></label>
+                                    </div></div>";
+                                $i++;
+                            }}}}
+                }
                 ?>
-                <div class="rating ">
-                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
-                </div>
+                
                 <div class="d-grid">
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
