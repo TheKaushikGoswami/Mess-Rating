@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'mess_rating');
+define('DB_USER', 'u763059533_three');
+define('DB_PASS', 'Dev@1234');
+define('DB_NAME', 'u763059533_three');
 
 date_default_timezone_set('Asia/Kolkata');
 $currentTime = date('H:i');

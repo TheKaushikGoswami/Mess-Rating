@@ -22,6 +22,7 @@ if(isset($_POST['login'])){
         $_SESSION['id'] = $row['id'];
         header('location:rating.php');
     }else{
+        header('location:user_login.php');
         echo "<script>alert('Email or password is incorrect.')</script>";
     }
 }

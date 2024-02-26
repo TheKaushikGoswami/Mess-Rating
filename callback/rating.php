@@ -1,5 +1,4 @@
 <?php
-ob_start();
 session_start(); // Start the session
 
 include 'Database.php';
@@ -49,7 +48,7 @@ if($currentTime >= '8:00' && $currentTime <= '12:00'){
 if(isset($_POST['submit'])){
     $i = 1;
     while($i <= $no_of_rows){
-        error_reporting(E_ALL ^ E_WARNING);
+        // error_reporting(E_ALL ^ E_WARNING);
         $item_id = $_POST['item_id'.$i];
         $rating = $_POST['rating'.$i];
         $check = "SELECT * FROM `ratings` WHERE user_id = '$userid' AND item_id = '$item_id' AND meal_id = '$meal' and date = '$date'";
